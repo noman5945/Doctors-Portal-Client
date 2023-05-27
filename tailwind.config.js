@@ -19,6 +19,15 @@ module.exports = {
       backgroundImage: {
         "banner-chair": "url('/src/assets/images/bg.png')",
       },
+      boxShadow: {
+        Fxl: "3px 4px 10px 2px rgba(0, 0, 0, 0.05);",
+      },
+      width: {
+        bx: "7.303rem",
+      },
+      height: {
+        by: "7.188rem",
+      },
     },
   },
   plugins: [require("daisyui")],
