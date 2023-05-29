@@ -12,7 +12,7 @@ const HomeAppoint = () => {
           src={docSmall}
           alt=""
         />
-        <div className="font-sans lg:w-[533.74px] lg:h-[299px]">
+        <div className="font-sans my-[71px] mx-[25px] w-[372px] h-[391px] lg:w-[533.74px] lg:h-[299px]">
           <h3 className="text-xl text-secondary font-bold">Appointment</h3>
           <h2 className="mt-6 text-white text-3xl">
             Make An Appointment Today

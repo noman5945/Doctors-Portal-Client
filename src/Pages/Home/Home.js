@@ -4,6 +4,7 @@ import UnderBanner from "./UnderBanner/UnderBanner";
 import Services from "./Services/Services";
 import MidSection from "./MidSection/MidSection";
 import HomeAppoint from "./HomeAppoint/HomeAppoint";
+import Testimonial from "./Testimonial/Testimonial";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Services></Services>
       <MidSection></MidSection>
       <HomeAppoint></HomeAppoint>
+      <Testimonial></Testimonial>
     </div>
   );
 };
