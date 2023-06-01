@@ -19,6 +19,7 @@ module.exports = {
       backgroundImage: {
         "banner-chair": "url('/src/assets/images/bg.png')",
         "appointment-pic": "url('/src/assets/images/appointment.png')",
+        "footer-cover": "url('/src/assets/images/footer.png')",
       },
       boxShadow: {
         Fxl: "3px 4px 10px 2px rgba(0, 0, 0, 0.05);",
