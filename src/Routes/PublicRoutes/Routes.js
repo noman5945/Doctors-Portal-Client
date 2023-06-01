@@ -6,6 +6,7 @@ import Login from "../../Pages/Login/Login";
 import Appointment from "../../Pages/Appointment/Appointment";
 import Reviews from "../../Pages/Reviews/Reviews";
 import ContactUs from "../../Pages/ContactUs/ContactUs";
+import Registration from "../../Pages/Registration/Registration";
 
 const routs = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const routs = createBrowserRouter([
       {
         path: "/contactus",
         element: <ContactUs></ContactUs>,
+      },
+      {
+        path: "/register",
+        element: <Registration></Registration>,
       },
     ],
   },
