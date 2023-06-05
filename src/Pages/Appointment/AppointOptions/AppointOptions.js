@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import AppointOptionsCard from "./AppointOptionsCard";
+import AppointTimeList from "../AppointTimeList/AppointTimeList";
 
 const AppointOptions = ({ date }) => {
+  const [showTimelist, setShowTimelist] = useState(false);
+  const [treatMent, setTreatment] = useState("");
+
+  const handleAppointMent = (serve) => {
+    setShowTimelist(true);
+    setTreatment(serve);
+    console.log(treatMent);
+  };
   const services = [
     {
       _id: "01",
@@ -40,10 +49,19 @@ const AppointOptions = ({ date }) => {
             <AppointOptionsCard
               key={service._id}
               title={service.title}
+              handleAppointMent={handleAppointMent}
             ></AppointOptionsCard>
           );
         })}
       </div>
+      {showTimelist ? (
+        <AppointTimeList
+          treatMent={treatMent}
+          setShowTimelist={setShowTimelist}
+        ></AppointTimeList>
+      ) : (
+        <></>
+      )}
     </section>
   );
 };

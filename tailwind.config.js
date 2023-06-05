@@ -9,7 +9,6 @@ module.exports = {
           secondary: "#19D3AE",
           accent: "#3A4256",
           neutral: "#3D4451",
-          ash: "#939393",
           "base-100": "#FFFFFF",
         },
       },
@@ -30,6 +29,11 @@ module.exports = {
       },
       height: {
         by: "7.188rem",
+      },
+      colors: {
+        ash: "#939393",
+        redBack: "#FF2E2E",
+        darkRed: "#D10000",
       },
     },
   },
