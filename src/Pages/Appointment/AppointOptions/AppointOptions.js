@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import AppointOptionsCard from "./AppointOptionsCard";
-import AppointTimeList from "../AppointTimeList/AppointTimeList";
+//import AppointTimeList from "../AppointTimeList/AppointTimeList";
 
 const AppointOptions = ({ date, options }) => {
-  const [showTimelist, setShowTimelist] = useState(false);
+  /*const [showTimelist, setShowTimelist] = useState(false);
   const [treatMent, setTreatment] = useState("");
-  //const [timeSlots, setTimeslots] = useState([]);
+  const [timeSlots, setTimeslots] = useState([]);
 
-  const handleAppointMent = (serve) => {
+  const handleAppointMent = (serve, slots) => {
     setShowTimelist(true);
     setTreatment(serve);
-    //const found = options.find((option) => option.name === treatMent);
-    //setTimeslots(found.slots);
-    //console.log(timeSlots.length);
+    setTimeslots(slots);
+    console.log(timeSlots.length);
     console.log(options);
-    //console.log(treatMent);
+    console.log(treatMent);
+  };
+  */
+  const handleAppointMent = () => {
+    console.log("parent not work man");
   };
 
   return (
@@ -29,19 +32,21 @@ const AppointOptions = ({ date, options }) => {
             <AppointOptionsCard
               key={option._id}
               title={option.name}
+              slots={option.slots}
               handleAppointMent={handleAppointMent}
             ></AppointOptionsCard>
           );
         })}
       </div>
-      {showTimelist ? (
+      {/*showTimelist ? (
         <AppointTimeList
           treatMent={treatMent}
+          timeslots={timeSlots}
           setShowTimelist={setShowTimelist}
         ></AppointTimeList>
       ) : (
         <></>
-      )}
+      )*/}
     </section>
   );
 };
