@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import AppointOptionsCard from "./AppointOptionsCard";
+import BookingModal from "../BookingModal/BookingModal";
 //import AppointTimeList from "../AppointTimeList/AppointTimeList";
 
 const AppointOptions = ({ date, options }) => {
   /*const [showTimelist, setShowTimelist] = useState(false);
-  const [treatMent, setTreatment] = useState("");
+  
   const [timeSlots, setTimeslots] = useState([]);
 
   const handleAppointMent = (serve, slots) => {
@@ -16,8 +17,9 @@ const AppointOptions = ({ date, options }) => {
     console.log(treatMent);
   };
   */
-  const handleAppointMent = () => {
-    console.log("parent not work man");
+  const [treatMent, setTreatment] = useState("");
+  const handleAppointMent = (treat) => {
+    setTreatment(treat);
   };
 
   return (
@@ -31,13 +33,16 @@ const AppointOptions = ({ date, options }) => {
           return (
             <AppointOptionsCard
               key={option._id}
-              title={option.name}
-              slots={option.slots}
+              appointOptions={option}
               handleAppointMent={handleAppointMent}
             ></AppointOptionsCard>
           );
         })}
       </div>
+      {treatMent && (
+        <BookingModal optionObj={treatMent} date={date}></BookingModal>
+      )}
+
       {/*showTimelist ? (
         <AppointTimeList
           treatMent={treatMent}
