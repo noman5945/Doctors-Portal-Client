@@ -1,6 +1,5 @@
-import React from "react";
-
 const AppointTimeList = ({ treatMent, setShowTimelist }) => {
+  console.log(treatMent);
   return (
     <div className=" my-8">
       <h2 className=" my-5 text-center font-normal text-xl text-secondary">
