@@ -18,12 +18,24 @@ const AuthProvider = ({ children }) => {
 
   const creatUser = (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((res) => {
+        setLoading(true);
+        //console.log(res);
+        alert("User created");
+        return true;
+      })
+      .catch((error) => {
+        alert(error);
+        return false;
+      });
   };
 
   const updateUserInfo = (userInfo) => {
     setLoading(true);
-    return updateProfile(auth.currentUser, userInfo);
+    return updateProfile(auth.currentUser, userInfo).then((res) => {
+      console.log(res);
+    });
   };
 
   const logIn = (email, password) => {

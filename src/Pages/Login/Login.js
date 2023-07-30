@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Login = () => {
+  const { logIn } = useContext(AuthContext);
   const [visible, setVisible] = useState(true);
   const [texttype, settextType] = useState("password");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const handleVisiblity = () => {
     if (!visible) {
       setVisible(true);
@@ -20,7 +26,11 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const pass = form.pass.value;
-    console.log(email + " " + pass);
+    logIn(email, pass).then((result) => {
+      const user = result.user;
+      console.log(user);
+      navigate(from, { replace: true });
+    });
   };
 
   const handleGoogleLogin = () => {

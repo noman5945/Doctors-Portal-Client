@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Registration = () => {
+  const { creatUser, updateUserInfo } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(true);
   const [texttype, settextType] = useState("password");
+  const [validPass, setValidpass] = useState(true);
+  const [emptyFields, setEmptyFields] = useState(false);
+
   const handleVisiblity = () => {
     if (!visible) {
       setVisible(true);
@@ -21,7 +27,30 @@ const Registration = () => {
     const name = form.name.value;
     const email = form.email.value;
     const pass = form.pass.value;
-    console.log(email + " " + pass + " " + name);
+    const photoURL =
+      "https://img.freepik.com/free-icon/user_318-563642.jpg?w=360";
+
+    const userInfo = {
+      displayName: name,
+      photoURL,
+    };
+    if (name === "" || email === "" || pass === "") {
+      setEmptyFields(true);
+    } else {
+      setEmptyFields(false);
+      const res = creatUser(email, pass);
+      res ? updateUserInfo(userInfo) : navigate("/register", { replace: true });
+    }
+  };
+
+  const handlePassValidity = (event) => {
+    let tempPass = event.target.value;
+    if (tempPass.length < 6) {
+      setValidpass(false);
+    } else {
+      setValidpass(true);
+    }
+    //console.log(validPass);
   };
 
   return (
@@ -40,6 +69,11 @@ const Registration = () => {
                   className="input input-bordered w-full max-w-xs h-[44px]"
                   required
                 />
+                {emptyFields ? (
+                  <p className="text-darkRed">Empty name field</p>
+                ) : (
+                  <></>
+                )}
               </div>
               <div className="block p-3">
                 <h3 className=" mb-2 text-sm">Email</h3>
@@ -50,6 +84,11 @@ const Registration = () => {
                   className="input input-bordered w-full max-w-xs h-[44px]"
                   required
                 />
+                {emptyFields ? (
+                  <p className="text-darkRed">Empty email field</p>
+                ) : (
+                  <></>
+                )}
               </div>
               <div className="block p-3">
                 <div className="flex flex-row justify-between">
@@ -72,7 +111,15 @@ const Registration = () => {
                   name="pass"
                   className="input input-bordered w-full max-w-xs h-[44px]"
                   required
+                  onChange={handlePassValidity}
                 />
+                {validPass ? (
+                  <></>
+                ) : (
+                  <p className=" text-darkRed">
+                    Password must be more than 6 characters
+                  </p>
+                )}
               </div>
 
               <div className="p-3">
