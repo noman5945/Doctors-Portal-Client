@@ -12,7 +12,7 @@ const Appointment = () => {
     //console.log(date);
   }
   useEffect(() => {
-    fetch("appointmentOptions.json")
+    fetch("http://localhost:5000/appointOptions")
       .then((res) => res.json())
       .then((data) => setOptions(data));
   });
