@@ -39,7 +39,9 @@ const Registration = () => {
     } else {
       setEmptyFields(false);
       const res = creatUser(email, pass);
-      res ? updateUserInfo(userInfo) : navigate("/register", { replace: true });
+      res === true
+        ? updateUserInfo(userInfo)
+        : navigate("/register", { replace: true });
     }
   };
 
