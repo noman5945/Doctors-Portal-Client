@@ -2,15 +2,35 @@ import React from "react";
 
 const BookingModal = ({ optionObj, date }) => {
   const { name, slots } = optionObj;
+  const apiBooking = "http://localhost:5000/bookings";
   const handleBooking = (event) => {
     event.preventDefault();
     const form = event.target;
     const time = form.slot.value;
-    const name = form.pname.value;
+    const pname = form.pname.value;
     const date = form.date.value;
     const contact = form.contact.value;
-    console.log(time + " " + name + " " + date + " " + contact);
-    fetch("http://localhost:5000/appointOptions");
+    const bookingData = {
+      Service: name,
+      Patient: pname,
+      Time: time,
+      Date: date,
+      Contact: contact,
+    };
+
+    fetch(apiBooking, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/JSON",
+      },
+      body: JSON.stringify(bookingData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          document.getElementById("my_modal_6").checked = false;
+        }
+      });
   };
   return (
     <>
@@ -27,8 +47,10 @@ const BookingModal = ({ optionObj, date }) => {
               name="date"
             />
             <select name="slot" className="select select-bordered w-full">
-              {slots.map((slot) => (
-                <option value={slot}>{slot}</option>
+              {slots.map((slot, index) => (
+                <option key={index} value={slot}>
+                  {slot}
+                </option>
               ))}
             </select>
             <input
