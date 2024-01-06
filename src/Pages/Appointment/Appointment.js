@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AppointBanner from "./AppointBanner/AppointBanner";
 import AppointOptions from "./AppointOptions/AppointOptions";
 import { format } from "date-fns/esm";
-import { useQuery } from "@tanstack/react-query";
+//import { useQuery } from "@tanstack/react-query";
 
 const Appointment = () => {
   const [selected, setSelected] = useState(new Date());
@@ -21,7 +21,7 @@ const Appointment = () => {
   // });
 
   useEffect(() => {
-    fetch("http://localhost:5000/appointOptions")
+    fetch(`http://localhost:5000/appointOptions?date=${date}`)
       .then((res) => res.json())
       .then((data) => setOptions(data));
   });
