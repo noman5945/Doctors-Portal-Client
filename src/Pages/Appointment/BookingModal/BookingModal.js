@@ -29,6 +29,8 @@ const BookingModal = ({ optionObj, date }) => {
       .then((data) => {
         if (data.acknowledged) {
           document.getElementById("my_modal_6").checked = false;
+        } else {
+          alert(data.messege);
         }
       });
   };
