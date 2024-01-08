@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const BookingModal = ({ optionObj, date }) => {
+  const { user } = useContext(AuthContext);
   const { name, slots } = optionObj;
+  const navigate = useNavigate();
   const apiBooking = "http://localhost:5000/bookings";
+
   const handleBooking = (event) => {
+    if (user == null) {
+      navigate("/register", { replace: true });
+      return;
+    }
     event.preventDefault();
     const form = event.target;
     const time = form.slot.value;
@@ -16,6 +25,7 @@ const BookingModal = ({ optionObj, date }) => {
       Time: time,
       Date: date,
       Contact: contact,
+      Email: user.email,
     };
 
     fetch(apiBooking, {
