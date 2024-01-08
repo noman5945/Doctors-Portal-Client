@@ -7,6 +7,9 @@ import Appointment from "../../Pages/Appointment/Appointment";
 import Reviews from "../../Pages/Reviews/Reviews";
 import ContactUs from "../../Pages/ContactUs/ContactUs";
 import Registration from "../../Pages/Registration/Registration";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Dashboard from "../../Pages/Dashboard/Dashboard";
+import DashboardLayout from "../../layouts/DashboardLayout";
 
 const routs = createBrowserRouter([
   {
@@ -40,6 +43,20 @@ const routs = createBrowserRouter([
       {
         path: "/register",
         element: <Registration></Registration>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
       },
     ],
   },
