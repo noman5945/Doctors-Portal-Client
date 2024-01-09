@@ -8,8 +8,9 @@ import Reviews from "../../Pages/Reviews/Reviews";
 import ContactUs from "../../Pages/ContactUs/ContactUs";
 import Registration from "../../Pages/Registration/Registration";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import Dashboard from "../../Pages/Dashboard/Dashboard";
+//import Dashboard from "../../Pages/Dashboard/Dashboard";
 import DashboardLayout from "../../layouts/DashboardLayout";
+import MyAppointment from "../../Pages/Dashboard/MyAppointment/MyAppointment";
 
 const routs = createBrowserRouter([
   {
@@ -56,7 +57,7 @@ const routs = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>,
+        element: <MyAppointment></MyAppointment>,
       },
     ],
   },
