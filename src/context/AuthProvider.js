@@ -16,13 +16,14 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const creatUser = (email, password) => {
+  const creatUser = (email, password, userInfo) => {
     setLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
         setLoading(true);
-        //console.log(res);
         alert("User created");
+        updateUserInfo(userInfo);
+        //console.log(res);
         return true;
       })
       .catch((error) => {
@@ -34,7 +35,7 @@ const AuthProvider = ({ children }) => {
   const updateUserInfo = (userInfo) => {
     setLoading(true);
     return updateProfile(auth.currentUser, userInfo).then((res) => {
-      console.log(res);
+      console.log("Updated " + res);
     });
   };
 

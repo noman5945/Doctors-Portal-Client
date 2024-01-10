@@ -2,14 +2,22 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../../context/AuthProvider";
+//import useToken from "../../hooks/useToken";
 
 const Registration = () => {
-  const { creatUser, updateUserInfo } = useContext(AuthContext);
+  const { creatUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [visible, setVisible] = useState(true);
   const [texttype, settextType] = useState("password");
   const [validPass, setValidpass] = useState(true);
   const [emptyFields, setEmptyFields] = useState(false);
+  //const [email, setEmail] = useState("");
+  //const [token] = useToken(email);
+  const userAddAPI = "http://localhost:5000/addUser";
+
+  /*if (token) {
+    navigate("/");
+  }*/
 
   const handleVisiblity = () => {
     if (!visible) {
@@ -38,10 +46,9 @@ const Registration = () => {
       setEmptyFields(true);
     } else {
       setEmptyFields(false);
-      const res = creatUser(email, pass);
-      res === true
-        ? updateUserInfo(userInfo)
-        : navigate("/register", { replace: true });
+      creatUser(email, pass, userInfo);
+
+      saveUser(name, email);
     }
   };
 
@@ -53,6 +60,35 @@ const Registration = () => {
       setValidpass(true);
     }
     //console.log(validPass);
+  };
+
+  const saveUser = (userName, userEmail) => {
+    const userinfo = {
+      Name: userName,
+      Email: userEmail,
+    };
+    fetch(userAddAPI, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userinfo),
+    })
+      .then((res) => res.json())
+      .then((data) => getUserToken(userEmail));
+  };
+
+  const getUserToken = (email) => {
+    const tokenAPI = `http://localhost:5000/jwt?email=${email}`;
+    fetch(tokenAPI)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.accesToken) {
+          console.log(data.accesToken);
+          localStorage.setItem("accessToken", data.accesToken);
+          navigate("/");
+        }
+      });
   };
 
   return (
