@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Pages/Shared/Header/Header";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
   return (
@@ -21,10 +21,10 @@ const DashboardLayout = () => {
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
             <li>
-              <a>Sidebar Item 1</a>
+              <Link to="/dashboard">Appointments</Link>
             </li>
             <li>
-              <a>Sidebar Item 2</a>
+              <Link to="/dashboard/allusers">Users</Link>
             </li>
           </ul>
         </div>

@@ -2,14 +2,22 @@ import React, { useContext, useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
   const { logIn } = useContext(AuthContext);
   const [visible, setVisible] = useState(true);
   const [texttype, settextType] = useState("password");
+  const [loggedEmail, setLoggedEmail] = useState("");
+  const [token] = useToken(loggedEmail);
   const navigate = useNavigate();
   const location = useLocation();
+
   const from = location.state?.from?.pathname || "/";
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   const handleVisiblity = () => {
     if (!visible) {
@@ -29,7 +37,8 @@ const Login = () => {
     logIn(email, pass).then((result) => {
       const user = result.user;
       console.log(user);
-      navigate(from, { replace: true });
+      setLoggedEmail(user.email);
+      //navigate(from, { replace: true });
     });
   };
 
