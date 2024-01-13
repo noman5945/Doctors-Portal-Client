@@ -10,6 +10,14 @@ const AddDoctor = () => {
   const Submit = (data) => {
     console.log(data);
   };
+  const options = [
+    "Teeth Orthodontics",
+    "Cosmetic Dentistry",
+    "Teeth Cleaning",
+    "Cavity Protection",
+    "Pediatric Dental",
+    "Oral Surgery",
+  ];
   return (
     <div className=" w-96 h-[480px]">
       <h3 className=" text-xl font-bold">Add Doctor</h3>
@@ -51,6 +59,21 @@ const AddDoctor = () => {
           {errors?.doctorsEmail?.type === "required" && (
             <p className="text-red-700 text-base">Email is required</p>
           )}
+        </div>
+        <div className="p-3">
+          <label className=" font-semibold text-lg">Doctor Type</label>
+          <select
+            className="select select-bordered w-full max-w-xs"
+            {...register("Doctor Type")}
+          >
+            {options.map((opt, index) => {
+              return (
+                <option key={index} value={opt}>
+                  {opt}
+                </option>
+              );
+            })}
+          </select>
         </div>
         <div className="p-3">
           <input type="submit" className="btn w-full h-[48px]" value="LOGIN" />
