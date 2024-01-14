@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../Shared/Loader/Loader";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddDoctor = () => {
   const {
@@ -10,7 +12,10 @@ const AddDoctor = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const url = `http://localhost:5000/appointmentSpecialty`;
+  const AddDoctorAPI = `http://localhost:5000/addDoctor`;
 
   const { data: options, isLoading } = useQuery({
     queryKey: ["options"],
@@ -25,7 +30,6 @@ const AddDoctor = () => {
   //console.log(imageHostKey);
 
   const Submit = (data) => {
-    console.log(data);
     const image = data.doctorImg[0];
     const imageHostURL = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
     const formData = new FormData();
@@ -39,6 +43,26 @@ const AddDoctor = () => {
         if (imgData.success) {
           const uploadedImgURL = imgData.data.url;
           console.log(uploadedImgURL);
+          const doctor = {
+            name: data.doctorsName,
+            email: data.doctorsEmail,
+            speciality: data.DoctorType,
+            DocImg: uploadedImgURL,
+          };
+          fetch(AddDoctorAPI, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(doctor),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              toast.success(`${data.name} added as Doctor`);
+              navigate("/dashboard");
+            });
         }
       });
   };
@@ -94,7 +118,7 @@ const AddDoctor = () => {
           <label className=" font-semibold text-lg">Doctor Type</label>
           <select
             className="select select-bordered w-full max-w-xs"
-            {...register("Doctor Type")}
+            {...register("DoctorType")}
           >
             {options.map((opt, index) => {
               return (
@@ -109,7 +133,11 @@ const AddDoctor = () => {
           <input type="file" {...register("doctorImg")}></input>
         </div>
         <div className="p-3">
-          <input type="submit" className="btn w-full h-[48px]" value="LOGIN" />
+          <input
+            type="submit"
+            className="btn w-full h-[48px]"
+            value="ADD DOCTOR"
+          />
         </div>
       </form>
     </div>
