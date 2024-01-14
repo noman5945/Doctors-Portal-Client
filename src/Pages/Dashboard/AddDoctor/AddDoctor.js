@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../Shared/Loader/Loader";
 
 const AddDoctor = () => {
   const {
@@ -7,17 +9,45 @@ const AddDoctor = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const url = `http://localhost:5000/appointmentSpecialty`;
+
+  const { data: options, isLoading } = useQuery({
+    queryKey: ["options"],
+    queryFn: async () => {
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  const imageHostKey = process.env.REACT_APP_imagebb_key;
+  //console.log(imageHostKey);
+
   const Submit = (data) => {
     console.log(data);
+    const image = data.doctorImg[0];
+    const imageHostURL = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+    const formData = new FormData();
+    formData.append("image", image);
+    fetch(imageHostURL, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          const uploadedImgURL = imgData.data.url;
+          console.log(uploadedImgURL);
+        }
+      });
   };
-  const options = [
-    "Teeth Orthodontics",
-    "Cosmetic Dentistry",
-    "Teeth Cleaning",
-    "Cavity Protection",
-    "Pediatric Dental",
-    "Oral Surgery",
-  ];
+
+  //must use Loading please. Because fetching takes time
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
+
   return (
     <div className=" w-96 h-[480px]">
       <h3 className=" text-xl font-bold">Add Doctor</h3>
@@ -68,12 +98,15 @@ const AddDoctor = () => {
           >
             {options.map((opt, index) => {
               return (
-                <option key={index} value={opt}>
-                  {opt}
+                <option key={opt._id} value={opt.name}>
+                  {opt.name}
                 </option>
               );
             })}
           </select>
+        </div>
+        <div className=" p-3">
+          <input type="file" {...register("doctorImg")}></input>
         </div>
         <div className="p-3">
           <input type="submit" className="btn w-full h-[48px]" value="LOGIN" />
@@ -82,5 +115,13 @@ const AddDoctor = () => {
     </div>
   );
 };
+
+/**
+ * Three places to store Images
+ * 1. Image hosting server(Third Party)
+ * 2. File System of your server
+ * 3. mongodb(database)
+ * Here I have used imagebb for photo storage
+ */
 
 export default AddDoctor;
