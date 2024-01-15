@@ -1,7 +1,6 @@
 import React from "react";
 
-const DoctorsTable = ({ datas }) => {
-  console.log(datas);
+const DoctorsTable = ({ datas, deletefunc }) => {
   return (
     <div className="overflow-x-auto">
       <table className="table w-full">
@@ -17,27 +16,31 @@ const DoctorsTable = ({ datas }) => {
         <tbody>
           {datas.map((data) => {
             return (
-              <>
-                <tr key={data._id}>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img src={data.DocImg} alt={data.name} />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">{data.name}</div>
+              <tr key={data._id}>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="w-24 rounded-md">
+                        <img src={data.DocImg} alt={data.name} />
                       </div>
                     </div>
-                  </td>
-                  <td>{data.speciality}</td>
-                  <td>{data.email}</td>
-                  <th>
-                    <button className="btn btn-error btn-sm">DELETE</button>
-                  </th>
-                </tr>
-              </>
+                    <div>
+                      <div className="font-bold">{data.name}</div>
+                    </div>
+                  </div>
+                </td>
+                <td>{data.speciality}</td>
+                <td>{data.email}</td>
+                <th>
+                  <label
+                    htmlFor="custom_modal"
+                    onClick={() => deletefunc(data)}
+                    className="btn btn-error btn-sm"
+                  >
+                    DELETE
+                  </label>
+                </th>
+              </tr>
             );
           })}
         </tbody>
