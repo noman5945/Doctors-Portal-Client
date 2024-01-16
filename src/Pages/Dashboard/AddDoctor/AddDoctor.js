@@ -60,7 +60,7 @@ const AddDoctor = () => {
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
-              toast.success(`${data.name} added as Doctor`);
+              toast.success(`${doctor.name} added as Doctor`);
               navigate("/dashboard");
             });
         }

@@ -33,6 +33,9 @@ const ManageDoctors = () => {
 
     fetch(delete_doc_API, {
       method: "DELETE",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((dec) => {
