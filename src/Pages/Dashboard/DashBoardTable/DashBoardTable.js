@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const DashBoardTable = ({ data }) => {
   const tabledata = data;
@@ -14,6 +15,7 @@ const DashBoardTable = ({ data }) => {
             <th>Time</th>
             <th>Date</th>
             <th>Contact</th>
+            <th>Payment</th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +29,11 @@ const DashBoardTable = ({ data }) => {
                 <td>{tdata.Time}</td>
                 <td>{tdata.Date}</td>
                 <td>{tdata.Contact}</td>
+                {tdata.Price && !tdata.Paid && (
+                  <Link to={`/dashboard/payment/${tdata._id}`}>
+                    <button className=" btn btn-sm  btn-accent">PAY</button>
+                  </Link>
+                )}
               </tr>
             );
           })}

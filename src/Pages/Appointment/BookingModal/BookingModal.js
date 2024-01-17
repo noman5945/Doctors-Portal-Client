@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const BookingModal = ({ optionObj, date }) => {
   const { user } = useContext(AuthContext);
-  const { name, slots } = optionObj;
+  const { name, price, slots } = optionObj;
   const navigate = useNavigate();
   const apiBooking = "http://localhost:5000/bookings";
 
@@ -26,6 +26,7 @@ const BookingModal = ({ optionObj, date }) => {
       Date: date,
       Contact: contact,
       Email: user.email,
+      Price: price,
     };
 
     fetch(apiBooking, {
