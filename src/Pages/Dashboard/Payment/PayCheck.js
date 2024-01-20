@@ -7,7 +7,9 @@ const PayCheck = ({ booking }) => {
   const elements = useElements();
   const [payError, setPayError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-  const { Price, Patient, Email } = booking;
+  const { Price, Patient, Email, _id } = booking;
+  const payment_save_API = `http://localhost:5000/payment-save`;
+  const date = new Date();
 
   useEffect(() => {
     //Create Payment Intent as soon as the page loads
@@ -68,6 +70,33 @@ const PayCheck = ({ booking }) => {
             toast.success(
               `Payment completed. TranxID: ${result.paymentIntent.id}`
             );
+            const paymentInfo = {
+              Patient: Patient,
+              Pay_Email: Email,
+              Transaction_ID: result.paymentIntent.id,
+              Date:
+                date.getDate() +
+                "/" +
+                (date.getMonth() + 1) +
+                "/" +
+                date.getFullYear(),
+              Time: (date.getHours() % 12) + ":" + date.getMinutes(),
+              Amount: Price,
+              Booking_Id: _id,
+            };
+            console.log(paymentInfo);
+            fetch(payment_save_API, {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(paymentInfo),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                toast.success("Payment Record added");
+                console.log(data);
+              });
           }
         }
       });
