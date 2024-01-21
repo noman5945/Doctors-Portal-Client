@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const DashBoardTable = ({ data }) => {
+const PaymentsTable = ({ data }) => {
   const tabledata = data;
   return (
     <div className="overflow-x-auto">
@@ -10,12 +9,12 @@ const DashBoardTable = ({ data }) => {
         <thead>
           <tr>
             <th></th>
-            <th>Service</th>
+            <th>Payer</th>
             <th>Patient Name</th>
             <th>Time</th>
             <th>Date</th>
-            <th>Contact</th>
-            <th>Payment</th>
+            <th>TranxID</th>
+            <th>Amount(USD)</th>
           </tr>
         </thead>
         <tbody>
@@ -24,19 +23,12 @@ const DashBoardTable = ({ data }) => {
             return (
               <tr key={index}>
                 <th>{index + 1}</th>
-                <td>{tdata.Service}</td>
+                <td>{tdata.Pay_Email}</td>
                 <td>{tdata.Patient}</td>
                 <td>{tdata.Time}</td>
                 <td>{tdata.Date}</td>
-                <td>{tdata.Contact}</td>
-                {tdata.Price && !tdata.Paid && (
-                  <Link to={`/dashboard/payment/${tdata._id}`}>
-                    <button className=" btn btn-sm  btn-accent">PAY</button>
-                  </Link>
-                )}
-                {tdata.Paid === true && (
-                  <p className=" font-bold text-green-500">Paid</p>
-                )}
+                <td>{tdata.Transaction_ID}</td>
+                <td>{tdata.Amount}</td>
               </tr>
             );
           })}
@@ -46,4 +38,4 @@ const DashBoardTable = ({ data }) => {
   );
 };
 
-export default DashBoardTable;
+export default PaymentsTable;

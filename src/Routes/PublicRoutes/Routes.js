@@ -17,6 +17,7 @@ import AddDoctor from "../../Pages/Dashboard/AddDoctor/AddDoctor";
 import ManageDoctors from "../../Pages/Dashboard/ManageDoctors/ManageDoctors";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
+import PaymentsList from "../../Pages/Dashboard/Payment/PaymentsList";
 
 const routs = createBrowserRouter([
   {
@@ -99,6 +100,14 @@ const routs = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/bookings-payment?id=${params.id}`),
+      },
+      {
+        path: "/dashboard/all-payments",
+        element: (
+          <PrivateRoute>
+            <PaymentsList></PaymentsList>
+          </PrivateRoute>
+        ),
       },
     ],
   },

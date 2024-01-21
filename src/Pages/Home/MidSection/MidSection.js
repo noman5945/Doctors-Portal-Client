@@ -1,5 +1,6 @@
 import React from "react";
 import treat from "../../../assets/images/treatment.png";
+import { Link } from "react-router-dom";
 
 const MidSection = () => {
   const details =
@@ -19,9 +20,11 @@ const MidSection = () => {
           Exceptional Dental Care, on Your Terms
         </h1>
         <p className="mt-[26px]">{details}</p>
-        <button className="mt-[45px] btn bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg border-stone-50">
-          Get Started
-        </button>
+        <Link to="/login">
+          <button className="mt-[45px] btn bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg border-stone-50">
+            Get Started
+          </button>
+        </Link>
       </div>
     </div>
   );

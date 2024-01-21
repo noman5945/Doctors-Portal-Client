@@ -1,5 +1,6 @@
 import React from "react";
 import chair from "../../../assets/images/chair.png";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -9,11 +10,12 @@ const Banner = () => {
         <div className="w-1/2">
           <h1 className="text-5xl font-bold">Your Smile Starts Here</h1>
           <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+            A web portal to find and book dental appointments and keep track of
+            them
           </p>
-          <button className="btn btn-primary">Get Started</button>
+          <Link to="/login">
+            <button className="btn btn-primary">Get Started</button>
+          </Link>
         </div>
       </div>
     </div>

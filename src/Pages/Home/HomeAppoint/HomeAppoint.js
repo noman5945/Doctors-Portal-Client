@@ -1,5 +1,6 @@
 import React from "react";
 import docSmall from "../../../assets/images/doctor-small.png";
+import { Link } from "react-router-dom";
 
 const HomeAppoint = () => {
   const makeAppoint =
@@ -18,9 +19,11 @@ const HomeAppoint = () => {
             Make An Appointment Today
           </h2>
           <p className="my-4 text-white text-base">{makeAppoint}</p>
-          <button className="mt-[45px] btn bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg border-stone-50">
-            Make Appointment
-          </button>
+          <Link to="/appointment">
+            <button className="mt-[45px] btn bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-lg border-stone-50">
+              Make Appointment
+            </button>
+          </Link>
         </div>
       </div>
     </div>
