@@ -4,7 +4,9 @@ const useAdmin = (email) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminLoader, setAdminLoader] = useState(true);
   useEffect(() => {
-    fetch(`http://localhost:5000/allusers/admin/${email}`)
+    fetch(
+      `https://doctors-portal-server-one-gamma.vercel.app/allusers/admin/${email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setAdminLoader(false);

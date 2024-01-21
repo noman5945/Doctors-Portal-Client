@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const useToken = (email) => {
   const [token, setToken] = useState("");
   useEffect(() => {
-    const tokenAPI = `http://localhost:5000/jwt?email=${email}`;
+    const tokenAPI = `https://doctors-portal-server-one-gamma.vercel.app/jwt?email=${email}`;
     fetch(tokenAPI)
       .then((res) => res.json())
       .then((data) => {

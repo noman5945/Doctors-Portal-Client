@@ -14,8 +14,8 @@ const AddDoctor = () => {
 
   const navigate = useNavigate();
 
-  const url = `http://localhost:5000/appointmentSpecialty`;
-  const AddDoctorAPI = `http://localhost:5000/addDoctor`;
+  const url = `https://doctors-portal-server-one-gamma.vercel.app/appointmentSpecialty`;
+  const AddDoctorAPI = `https://doctors-portal-server-one-gamma.vercel.app/addDoctor`;
 
   const { data: options, isLoading } = useQuery({
     queryKey: ["options"],

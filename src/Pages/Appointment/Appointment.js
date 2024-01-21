@@ -18,12 +18,14 @@ const Appointment = () => {
   // const { data: options = [], isLoading } = useQuery({
   //   queryKey: ["options"],
   //   queryFn: () => {
-  //     fetch("http://localhost:5000/appointOptions").then((res) => res.json());
+  //     fetch("https://doctors-portal-server-one-gamma.vercel.app/appointOptions").then((res) => res.json());
   //   },
   // });
 
   useEffect(() => {
-    fetch(`http://localhost:5000/appointOptions?date=${date}`)
+    fetch(
+      `https://doctors-portal-server-one-gamma.vercel.app/appointOptions?date=${date}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setOptions(data);

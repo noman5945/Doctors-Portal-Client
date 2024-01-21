@@ -8,12 +8,12 @@ const PayCheck = ({ booking }) => {
   const [payError, setPayError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const { Price, Patient, Email, _id } = booking;
-  const payment_save_API = `http://localhost:5000/payment-save`;
+  const payment_save_API = `https://doctors-portal-server-one-gamma.vercel.app/payment-save`;
   const date = new Date();
 
   useEffect(() => {
     //Create Payment Intent as soon as the page loads
-    const payment_intent_API = `http://localhost:5000/create-payment-intent`;
+    const payment_intent_API = `https://doctors-portal-server-one-gamma.vercel.app/create-payment-intent`;
     fetch(payment_intent_API, {
       method: "POST",
       headers: {

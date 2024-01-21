@@ -16,7 +16,7 @@ const ManageDoctors = () => {
   } = useQuery({
     queryKey: ["doctors"],
     queryFn: async () => {
-      const getDoctorsAPI = `http://localhost:5000/manage-doctors?email=${user.email}`;
+      const getDoctorsAPI = `https://doctors-portal-server-one-gamma.vercel.app/manage-doctors?email=${user.email}`;
       const res = await fetch(getDoctorsAPI, {
         method: "POST",
         headers: {
@@ -29,7 +29,7 @@ const ManageDoctors = () => {
   });
 
   const handleDelete = (id) => {
-    const delete_doc_API = `http://localhost:5000/delete-doctor?id=${id}`;
+    const delete_doc_API = `https://doctors-portal-server-one-gamma.vercel.app/delete-doctor?id=${id}`;
 
     fetch(delete_doc_API, {
       method: "DELETE",

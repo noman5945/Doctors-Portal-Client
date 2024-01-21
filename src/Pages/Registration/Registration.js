@@ -13,7 +13,8 @@ const Registration = () => {
   const [emptyFields, setEmptyFields] = useState(false);
   //const [email, setEmail] = useState("");
   //const [token] = useToken(email);
-  const userAddAPI = "http://localhost:5000/addUser";
+  const userAddAPI =
+    "https://doctors-portal-server-one-gamma.vercel.app/addUser";
 
   /*if (token) {
     navigate("/");
@@ -79,7 +80,7 @@ const Registration = () => {
   };
 
   const getUserToken = (email) => {
-    const tokenAPI = `http://localhost:5000/jwt?email=${email}`;
+    const tokenAPI = `https://doctors-portal-server-one-gamma.vercel.app/jwt?email=${email}`;
     fetch(tokenAPI)
       .then((res) => res.json())
       .then((data) => {

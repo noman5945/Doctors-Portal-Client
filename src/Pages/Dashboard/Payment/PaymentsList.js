@@ -10,7 +10,7 @@ const PaymentsList = () => {
     queryKey: ["payments"],
     queryFn: async () => {
       const get_payments = await fetch(
-        `http://localhost:5000/payment-list?email=${user?.email}`
+        `https://doctors-portal-server-one-gamma.vercel.app/payment-list?email=${user?.email}`
       );
       const data = await get_payments.json();
       return data;

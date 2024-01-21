@@ -6,7 +6,8 @@ const BookingModal = ({ optionObj, date }) => {
   const { user } = useContext(AuthContext);
   const { name, price, slots } = optionObj;
   const navigate = useNavigate();
-  const apiBooking = "http://localhost:5000/bookings";
+  const apiBooking =
+    "https://doctors-portal-server-one-gamma.vercel.app/bookings";
 
   const handleBooking = (event) => {
     if (user == null) {

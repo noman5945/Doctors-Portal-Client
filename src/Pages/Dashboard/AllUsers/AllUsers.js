@@ -4,7 +4,7 @@ import Loader from "../../Shared/Loader/Loader";
 import toast from "react-hot-toast";
 
 const AllUsers = () => {
-  const url = `http://localhost:5000/allusers`;
+  const url = `https://doctors-portal-server-one-gamma.vercel.app/allusers`;
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -15,7 +15,7 @@ const AllUsers = () => {
   });
 
   const handleMakeAdmin = (id) => {
-    const url = `http://localhost:5000/allusers/admin/${id}`;
+    const url = `https://doctors-portal-server-one-gamma.vercel.app/allusers/admin/${id}`;
     fetch(url, {
       method: "PUT",
     })

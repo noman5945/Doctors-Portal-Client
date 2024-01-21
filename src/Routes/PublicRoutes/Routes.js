@@ -99,7 +99,9 @@ const routs = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bookings-payment?id=${params.id}`),
+          fetch(
+            `https://doctors-portal-server-one-gamma.vercel.app/bookings-payment?id=${params.id}`
+          ),
       },
       {
         path: "/dashboard/all-payments",
